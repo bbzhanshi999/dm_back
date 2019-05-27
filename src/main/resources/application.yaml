@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: 1234
+    username: root
+    url: jdbc:mysql://localhost:3306/dm?useUnicode=true&characterEncoding=utf8
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+mybatis:
+  mapper-locations: classpath:/mappers*.xml
+server:
+  port: 8081
+
