@@ -7,4 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeService extends BaseService<Employee,EmployeeDao> {
+    public Employee findByUsername(String username) {
+        Employee employee = new Employee();
+        employee.setUsername(username);
+        return dao.find(employee);
+    }
 }

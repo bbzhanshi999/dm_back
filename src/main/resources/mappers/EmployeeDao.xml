@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.hyit.dm.app.dao.EmployeeDao">
+
+    <resultMap id="employeeMap" type="edu.hyit.dm.app.model.Employee">
+        <id property="id" column="id" />
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <association property="department" javaType="edu.hyit.dm.app.model.Department">
+            <id column="depart_id" property="id" />
+            <result column="depart_name" property="departName" />
+            <result column="depart_code" property="departCode" />
+        </association>
+    </resultMap>
+
+
+    <select id="find" resultMap="employeeMap">
+        select
+          e.id,
+          e.username,
+          e.password,
+          e.name,
+          e.phone,
+          e.depart_id,
+          d.depart_name,
+          d.depart_code
+
+        from employee_info e
+        left join depart_info d on d.id=e.depart_id
+        <where>
+            and d.del_flag!='1' and e.del_flag!='1'
+            <if test="username!=null and username!=''">
+               and e.username = #{username}
+            </if>
+            <if test="id!=null and id!=''">
+                and e.id = #{id}
+            </if>
+        </where>
+    </select>
+
+
+
+
+</mapper>
