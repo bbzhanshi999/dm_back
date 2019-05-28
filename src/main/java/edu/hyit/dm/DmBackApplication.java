@@ -17,14 +17,14 @@ public class DmBackApplication implements WebMvcConfigurer {
     }
 
 
-    @Override
+  /*  @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
                 .allowedOrigins("*")
                 .allowCredentials(true)
                 .allowedMethods("DELETE","PUT","GET","POST")
                 .maxAge(3600);
-    }
+    }*/
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
