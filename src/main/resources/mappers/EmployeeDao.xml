@@ -10,6 +10,7 @@
         <result property="password" column="password"/>
         <result property="name" column="name"/>
         <result property="phone" column="phone"/>
+        <result property="updateTime" column="update_time"/>
         <association property="department" javaType="edu.hyit.dm.app.model.Department">
             <id column="depart_id" property="id" />
             <result column="depart_name" property="departName" />
@@ -26,9 +27,9 @@
           e.name,
           e.phone,
           e.depart_id,
+          e.update_time,
           d.depart_name,
           d.depart_code
-
         from employee_info e
         left join depart_info d on d.id=e.depart_id
         <where>
@@ -42,7 +43,27 @@
         </where>
     </select>
 
-
+    <select id="findList" resultMap="employeeMap">
+        select
+        e.id,
+        e.username,
+        e.password,
+        e.name,
+        e.phone,
+        e.depart_id,
+        e.update_time,
+        d.depart_name,
+        d.depart_code
+        from employee_info e
+        left join depart_info d on d.id=e.depart_id
+        <where>
+            and d.del_flag!='1' and e.del_flag!='1'
+            <if test="username!=null and username!=''">
+                and e.username = #{username}
+            </if>
+        </where>
+        order by e.update_time DESC
+    </select>
 
 
 </mapper>
