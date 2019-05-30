@@ -16,7 +16,11 @@ public class BaseModel {
 
     public void preInsert(){
         id = IdGenerator.genId();
+        updateTime = new Date();
     }
 
 
+    public void preUpdate() {
+        updateTime = new Date();
+    }
 }

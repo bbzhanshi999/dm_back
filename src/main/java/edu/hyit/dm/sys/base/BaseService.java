@@ -1,6 +1,5 @@
 package edu.hyit.dm.sys.base;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +40,11 @@ public class BaseService<T extends BaseModel,D extends BaseDao<T>> {
 
     public void save(T t){
         t.setUpdateTime(new Date());
-        if(t.getId()!=null){
-            t.preInsert();
+        if(t.getId()!=null&&!"".equals(t.getId())){
+            t.preUpdate();
             dao.update(t);
         }else{
+            t.preInsert();
             dao.insert(t);
         }
     }

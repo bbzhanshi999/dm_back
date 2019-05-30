@@ -65,5 +65,17 @@
         order by e.update_time DESC
     </select>
 
-
+    <insert id="insert">
+        insert into employee_info (
+          id,
+          username,
+          password,
+          name,
+          depart_id,
+          phone,
+          update_time
+        )values (
+          #{id},#{username},#{password},#{name},#{department.id},#{phone},#{updateTime}
+        )
+    </insert>
 </mapper>

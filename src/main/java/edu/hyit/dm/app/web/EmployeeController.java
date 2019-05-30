@@ -35,4 +35,10 @@ public class EmployeeController {
 
     }
 
+    @PostMapping("/api/employee/save")
+    public String save(@RequestBody Employee employee){
+        employeeService.save(employee);
+        return "{\"status\":\"success\"}";
+    }
+
 }
