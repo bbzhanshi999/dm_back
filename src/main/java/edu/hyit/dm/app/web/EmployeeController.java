@@ -1,6 +1,5 @@
 package edu.hyit.dm.app.web;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import edu.hyit.dm.app.model.Employee;
 import edu.hyit.dm.app.service.EmployeeService;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @RestController
 public class EmployeeController {
