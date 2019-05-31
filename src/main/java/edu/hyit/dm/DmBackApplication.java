@@ -26,10 +26,10 @@ public class DmBackApplication implements WebMvcConfigurer {
                 .maxAge(3600);
     }*/
 
-    @Override
+    /*@Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthenticationInteceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/api/login/**","/static/**");
-    }
+    }*/
 }

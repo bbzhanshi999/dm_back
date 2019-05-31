@@ -21,7 +21,7 @@ create table drug_info
 )
 ;
 
-create table drug_list
+/*create table drug_list
 (
 	id varchar(32) not null
 		primary key,
@@ -33,14 +33,14 @@ create table drug_list
 	self_paying double null,
 	del_flag char default '0' null
 )
-;
+;*/
 
-create table drug_list_info
+create table mr_drug
 (
 	drug_info_id varchar(32) default '' not null,
-	drug_list_id varchar(32) default '' not null,
-	drug_count double null,
-	primary key (drug_info_id, drug_list_id)
+	mr_id varchar(32) default '' not null,
+	drug_count int null,
+	primary key (drug_info_id, mr_id)
 )
 ;
 
@@ -67,6 +67,11 @@ create table medical_record
 	age int null,
 	depart_id varchar(32) null,
 	contract varchar(10) null,
+	pay_status char null comment '0：未付款，1：暂存 2：付款',
+	pay_time datetime null,
+	operator_id varchar(32) null,
+	amount double null,
+	self_paying double null,
 	update_time datetime null,
 	del_flag char default '0' null
 )

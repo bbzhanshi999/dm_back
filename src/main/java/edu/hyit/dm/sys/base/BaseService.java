@@ -13,7 +13,7 @@ public class BaseService<T extends BaseModel,D extends BaseDao<T>> {
     @Autowired
     protected D dao;
 
-    public T findById(Long id){
+    public T findById(String id){
         return dao.findById(id);
     }
 

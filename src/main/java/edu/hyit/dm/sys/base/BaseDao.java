@@ -18,5 +18,5 @@ public interface BaseDao<T extends BaseModel> {
 
     List<T> findAll();
 
-    T findById(Long id);
+    T findById(String id);
 }

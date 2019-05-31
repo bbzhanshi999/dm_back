@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.hyit.dm.app.dao.MedicalRecordDao">
+
+
+    <resultMap id="medicalRecordMap" type="edu.hyit.dm.app.model.MedicalRecord">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="gender" column="gender" />
+        <result property="age" column="age" />
+        <result property="payStatus" column="pay_status" />
+        <result property="payTime" column="pay_time" />
+        <result property="amount" column="amount" />
+        <result property="selfPaying" column="selfPaying" />
+        <result property="updateTime" column="update_time" />
+        <association property="doctor" javaType="edu.hyit.dm.app.model.Employee">
+            <id property="id"  column="doctor_id"/>
+            <result property="name" column="doctorName" />
+        </association>
+        <association property="operator" javaType="edu.hyit.dm.app.model.Employee">
+            <id property="id"  column="operator_id"/>
+            <result property="name" column="operatorName" />
+        </association>
+        <collection property="drugList" ofType="edu.hyit.dm.app.model.MrDrugInfo">
+            <result property="drugCount" column="drug_count" />
+            <association property="drugInfo" javaType="edu.hyit.dm.app.model.DrugInfo">
+                <id property="id" column="drugId" />
+                <result property="drugCode" column="drug_code" />
+                <result property="drugName" column="drug_name" />
+                <result property="unit" column="unit" />
+                <result property="price" column="price" />
+            </association>
+        </collection>
+    </resultMap>
+
+    <select id="findById" resultMap="medicalRecordMap">
+        select
+            m.id,
+            m.name,
+            m.gender,
+            m.doctor_id,
+            m.age,
+            m.depart_id,
+            m.contract,
+            m.pay_status,
+            m.pay_time,
+            m.operator_id,
+            m.amount,
+            m.self_paying,
+            m.update_time,
+            d.name  doctorName,
+            o.name  operatorName,
+            di.id  drugId,
+            di.drug_code,
+            di.drug_name,
+            di.unit,
+            di.price,
+            md.drug_count
+         from medical_record m
+          left join employee_info d on m.doctor_id = d.id
+          left join employee_info o on m.operator_id = o.id
+          left join mr_drug md on md.mr_id = m.id
+          left join drug_info di on di.id = md.drug_info_id
+        where m.del_flag!='1'
+          and m.id = #{id}
+    </select>
+
+    <select id="findList" resultMap="medicalRecordMap">
+        select
+            m.id,
+            m.name,
+            m.gender,
+            m.doctor_id,
+            m.age,
+            m.depart_id,
+            m.contract,
+            m.pay_status,
+            m.pay_time,
+            m.operator_id,
+            m.amount,
+            m.self_paying,
+            m.update_time,
+            d.name  doctorName,
+            o.name  operatorName,
+            di.id  drugId,
+            di.drug_code,
+            di.drug_name,
+            di.unit,
+            di.price,
+            md.drug_count
+         from medical_record m
+          left join employee_info d on m.doctor_id = d.id
+          left join employee_info o on m.operator_id = o.id
+          left join mr_drug md on md.mr_id = m.id
+          left join drug_info di on di.id = md.drug_info_id
+        <where>
+            m.del_flag!='1'
+            <if test="id!=null and id!=''">
+                and m.id like  CONCAT('%',#{id},'%')
+            </if>
+        </where>
+
+    </select>
+
+    <insert id="insert" >
+        insert into medical_record (
+          id,name,gender,doctor_id,age,depart_id,contract,pay_status,update_time
+        ) values (
+          #{id},#{name},#{gender},#{doctor.id},#{age},#{department.id},#{contract},#{payStatus},#{updateTime}
+        )
+    </insert>
+</mapper>
