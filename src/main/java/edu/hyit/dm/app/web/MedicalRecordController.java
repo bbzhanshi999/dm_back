@@ -23,7 +23,11 @@ public class MedicalRecordController {
     }
 
     @PostMapping("save")
-    public void insert(@RequestBody MedicalRecord medicalRecord){
+    public void save(@RequestBody MedicalRecord medicalRecord){
         medicalRecordService.save(medicalRecord);
+    }
+    @PostMapping("saveUnion")
+    public void saveUnion(@RequestBody MedicalRecord medicalRecord){
+        medicalRecordService.saveUnionDrugInfo(medicalRecord);
     }
 }

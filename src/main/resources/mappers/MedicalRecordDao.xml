@@ -111,4 +111,11 @@
           #{id},#{name},#{gender},#{doctor.id},#{age},#{department.id},#{contract},#{payStatus},#{updateTime}
         )
     </insert>
+
+    <insert id="insertMrDrugBatch" parameterType="java.util.List">
+        insert into mr_drug (mr_id,drug_info_id,drug_count) values
+        <foreach collection="list" item="mrDrug" separator=",">
+            (#{mrDrug.mrId}, #{mrDrug.drugInfo.id},#{mrDrug.drugCount})
+        </foreach>
+    </insert>
 </mapper>

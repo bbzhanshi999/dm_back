@@ -1,0 +1,26 @@
+{
+  "name": "范乔丹",
+  "gender": "男",
+  "age": 12,
+  "contract": "医保",
+  "payStatus": "0",
+  "doctor": {
+    "id": "22"
+  },
+  "updateTime": "2018-09-09 12:12:12",
+  "drugList":[
+    {
+      "drugCount":10,
+      "drugInfo":{"id":"1"}
+    },{
+      "drugCount":5,
+      "drugInfo":{"id":"2"}
+    },{
+      "drugCount":3,
+      "drugInfo":{"id":"3"}
+    },{
+      "drugCount":4,
+      "drugInfo":{"id":"4"}
+    }
+  ]
+}
